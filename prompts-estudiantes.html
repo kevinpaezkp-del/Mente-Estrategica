@@ -1,0 +1,69 @@
+<!doctype html><html lang="es"><head><meta charset="UTF-8"/><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prompts · Mente Estratégica</title><style>
+:root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:#f5f7fc;color:#283851;font:15px/1.55 Inter,system-ui,"Segoe UI",Arial,sans-serif}
+header{background:#10234a;color:white;padding:25px max(25px,calc((100vw - 1050px)/2))}header a{color:#e2ecff;text-decoration:none;font-weight:700}main{max-width:1110px;margin:auto;padding:24px 26px 80px}
+h1{font-size:clamp(32px,5vw,53px);margin:10px 0 5px}header p{opacity:.84;max-width:750px;margin:5px 0 0}
+.explain{margin:0 0 20px}.prompt-box{margin:16px 0;border:1px solid #dce4ef;background:white;border-radius:19px;box-shadow:0 12px 40px #1a30520b;padding:22px}
+.prompt-head{display:flex;gap:15px;align-items:center;flex-wrap:wrap}.prompt-head h2{font-size:20px;color:#18325f;margin:0;flex:1}.prompt-number{font-size:11px;font-weight:900;letter-spacing:.09em;color:#cf2455}
+.copy,.download{border:0;border-radius:11px;background:#193464;color:white;padding:10px 17px;font-weight:800;cursor:pointer;text-decoration:none;display:inline-block}
+.copy:hover{background:#31558f}
+details{margin-top:15px}summary{color:#1e3b69;font-weight:700;cursor:pointer;padding:6px 0}pre{white-space:pre-wrap;overflow-wrap:anywhere;background:#f5f8fd;color:#2d3e59;border-radius:11px;padding:20px;border:1px solid #e4eaf2;font:13px/1.7 ui-monospace,SFMono-Regular,Consolas,monospace}
+footer{max-width:1110px;margin:auto;padding:0 25px 25px;color:#8291a8;font-size:12px}
+@media(max-width:550px){main{padding:19px 14px}.prompt-box{padding:17px}.copy{width:100%}}
+</style></head><body><header><a href="./">← Regresar al curso</a><h1>Prompts para practicar</h1><p>Mente Estratégica · Copia cada instrucción y úsala junto con el archivo Excel del laboratorio cuando sea necesario.</p></header><main><p class="explain">Estos cuatro prompts están dirigidos a los estudiantes. No requieren copiar enlaces internos de Slack y evitan inventar datos o resultados.</p><a class="download" href="Solicitudes_Traslado_28_Registros.xlsx" download>↓ Descargar el Excel</a><article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 01</span><h2>Crear dashboard HTML a partir del Excel</h2><button type="button" class="copy" data-copy="0">Copiar prompt</button></div><details open><summary>Ver el texto completo</summary><pre id="prompt-0">Eres analista de datos y desarrollador frontend. Examina primero la estructura REAL del Excel adjunto. Construye un dashboard profesional de «Solicitudes de Traslado Interno | Mente Estratégica» en un único HTML que pueda utilizarse en computador o celular. Usa EXCLUSIVAMENTE las filas y columnas presentes. No inventes datos, columnas, tiempos ni métricas. Las columnas previstas son: Solicitud, Origen, Destino, Prioridad, Estado, Responsable, FechaSolicitud y FechaCierre; si faltan o se llaman distinto, repórtalo y pide mapeo explícito.
+
+CÁLCULO 100% DINÁMICO:
+Nunca escribas en el código KPIs, totales, porcentajes, recuentos, medias o distribuciones como resultados precalculados. Calcula siempre desde los REGISTROS ACTUALES; al modificar filtros o cargar otro archivo, recalcúlalos TODOS usando el subconjunto visible y sus denominadores correspondientes. Tarjetas: total, creados, asignados, cerrados, porcentaje de cierre y tiempo promedio de cierre en HORAS. Tiempo de cierre = FechaCierre menos FechaSolicitud exclusivamente cuando Estado = Cerrado, ambas fechas sean válidas y FechaCierre &gt;= FechaSolicitud. Excluye de la media los casos no cerrados, las fechas vacías, incorrectas o anteriores a la solicitud. Muestra el número de cierres con duración válida y avisa cuántos cerrados tienen fechas inválidas, sin mostrar NaN, Infinity ni undefined. No calcules tiempos de cierre con fecha actual para pendientes.
+
+VISUALIZACIÓN: diseño ejecutivo moderno, responsive, tarjetas, gráfico por estado, por prioridad y por origen, tabla detallada y buscador. Incluye sección de FILTROS plegable/desplegable, con multiselección por Estado, Prioridad, Origen, Destino y Responsable, intervalos de fechas y opción explícita «Sin dato» si hay registros vacíos; permitir combinar filtros y botón visible «Limpiar filtros». Todos los gráficos, rankings, KPIs, porcentajes y tabla deben recalcularse sobre el MISMO subconjunto.
+
+IMPORTACIÓN: botón «Actualizar base de datos» con input accept=&quot;.xlsx,.xls,.csv,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet,application/vnd.ms-excel,text/csv&quot;. Interpretar Excel/CSV, escoger la tabla que tenga las ocho columnas, normalizar fechas válidas y vacíos a null, detectar cabeceras incorrectas y mostrar mensajes de error comprensibles. Nunca mezclar la base nueva con la anterior accidentalmente: reemplazarla, reconstruir opciones de filtro y recalcularlo todo.
+
+EXPORTACIÓN: botón «Guardar HTML con datos actuales»: crear una copia HTML funcional que incluya solamente los REGISTROS actualmente cargados (no los KPIs precalculados). Al abrir la copia, todos los cálculos y filtros deben funcionar desde esas filas. El código debe validar registros con campos vacíos y cero resultados, y manejar escapado seguro del texto al renderizar filas.
+
+VALIDACIÓN OBLIGATORIA: comprobar que la suma Creado + Asignado + Cerrado coincide con el total de registros con esos estados, que los cambios de filtros actualizan todos los paneles, que Limpiar funciona, que acepta Excel, que reemplazar datos reconstruye filtros, que el promedio utiliza únicamente cerrados elegibles y que el HTML guardado vuelve a calcular los indicadores. Mostrar fecha de corte de los datos y nota «Datos ficticios con fines educativos; no hay sincronización automática con SharePoint». Entrega el HTML real y funcional, no solo instrucciones.</pre></details></article>
+<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 02</span><h2>Slackbot: crear lista desde Excel y vincularla al canal</h2><button type="button" class="copy" data-copy="1">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-1">Con base en el archivo Excel que adjunto, crea en Slack una lista llamada «Solicitudes de traslado». Usa únicamente los datos del Excel, sin agregar registros ni cambiar los valores originales.
+
+1. Crea un ítem por cada fila de la hoja de datos, respetando los encabezados y las filas existentes. Antes de importar, muestra cuántos registros encontraste y el nombre de los ocho campos.
+2. Configura los campos:
+- Solicitud: título o nombre del ítem, texto obligatorio.
+- Origen: selección con Urgencias, Hospitalización, UCI y Quirófano.
+- Destino: selección con Hospitalización, UCI, Imágenes y Quirófano.
+- Prioridad: selección con Alta, Media y Baja.
+- Estado: selección con Creado, Asignado y Cerrado; deja Creado como valor predeterminado para ítems NUEVOS, sin cambiar los estados existentes.
+- Responsable: texto o selección con Sin asignar, Equipo A, Equipo B y Equipo C. No conviertas los equipos en usuarios de Slack ni los asignes a personas.
+- FechaSolicitud y FechaCierre: conserva fecha Y HORA. Si un campo de Slack no admite hora, crea un campo de texto con el formato AAAA-MM-DD HH:mm; deja FechaCierre vacía cuando no exista.
+3. Crea dos vistas: «Por estado» (agrupada por Estado) y «Pendientes» (Estado diferente de Cerrado).
+4. Agrega la lista como pestaña del canal en el que estoy trabajando. Si no puedes identificar el canal, pregúntame su nombre antes de compartirla.
+5. Comprueba que el número de elementos creados coincide con el número de filas del Excel y explícame qué ajustes hiciste.
+
+Si necesitas autorización para crear, configurar o compartir, muéstrame la acción para aprobarla. Si alguna función no está disponible en mi Slack, dime cómo hacer solo ese paso manualmente, sin afirmar que lo realizaste.</pre></details></article>
+<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 03</span><h2>Slackbot: generar un dashboard desde la lista</h2><button type="button" class="copy" data-copy="2">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-2">Con base en la lista de Slack llamada «Solicitudes de traslado», crea una superficie interactiva (dashboard interno de Slack) titulada «Tablero de solicitudes de traslado».
+
+Utiliza exclusivamente los registros ACTUALES de esa lista. No necesito pegar un enlace: busca la lista por su nombre en mi espacio de trabajo y, si hay más de una con el mismo nombre, muéstrame las opciones para elegir la correcta.
+
+Incluye:
+- Tarjetas con Total de solicitudes, Creado, Asignado, Cerrado y porcentaje de cierre.
+- Gráficos por Estado, Prioridad y Origen.
+- Una tabla con Solicitud, Origen, Destino, Prioridad, Estado, Responsable, FechaSolicitud y FechaCierre.
+- Una sección «Pendientes por gestionar» con solicitudes en estado Creado o Asignado, organizada por prioridad.
+- Si hay datos de fechas utilizables, tiempo promedio de cierre en horas = FechaCierre menos FechaSolicitud, SOLO para registros con Estado = Cerrado y las dos fechas válidas, con cierre no anterior a la solicitud. No incluyas pendientes ni fechas vacías en el promedio; informa el denominador válido.
+- Filtros interactivos por Estado, Prioridad y Origen, si el entorno lo permite.
+
+Todos los porcentajes y conteos deben salir de los ítems reales. Si hay campos vacíos, muéstralos como «Sin dato» y evita NaN, Infinity y divisiones por cero. Comprueba que Creado + Asignado + Cerrado coincide con el total de elementos con esos estados; señala cualquier estado diferente.
+
+Muestra la fecha de generación y aclara que, si la superficie no se refresca automáticamente al modificar la lista, habrá que regenerarla. Finalmente, indícame cómo abrirla o agregarla como pestaña al mismo canal de la lista.</pre></details></article>
+<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 04</span><h2>Slackbot: revisar pendientes y actualizar una solicitud</h2><button type="button" class="copy" data-copy="3">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-3">En mi lista de Slack llamada «Solicitudes de traslado», necesito hacer dos tareas sencillas:
+
+PRIMERO: muéstrame un resumen de los pendientes, separados por Estado (Creado y Asignado) y por Prioridad (Alta, Media, Baja). Incluye cuántos hay en cada grupo y una tabla con Solicitud, Estado, Prioridad y Responsable. Usa solo los registros reales de la lista, sin inventar datos ni confundir «pendiente» con «vencido».
+
+SEGUNDO: busca la solicitud «TR-030 · Quirófano a Imágenes» (o el registro cuyo código sea TR-030). Propón cambiar únicamente Estado a «Asignado» y Responsable a «Equipo B», manteniendo todos los demás campos iguales. Antes de guardar, muéstrame el registro y los dos cambios para que pueda revisarlos y aprobarlos. No hagas la edición si ese registro no existe o ya tiene otros valores incompatibles.
+
+Después de la aprobación, comprueba que el cambio quedó guardado y vuelve a mostrar el resumen actualizado. Si no puedes editar la lista desde Slackbot, dame los pasos para cambiar esos dos campos manualmente en Slack.</pre></details></article></main><footer>LaCardio · Mente Estratégica · Datos ficticios para formación</footer>
+<script>
+document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{
+ const target=document.querySelector('#prompt-'+button.dataset.copy),original=button.textContent;let ok=false;
+ try{await navigator.clipboard.writeText(target.textContent);ok=true}catch(e){let node=document.createElement('textarea');node.value=target.textContent;node.style.position='fixed';node.style.opacity='0';document.body.appendChild(node);node.select();ok=document.execCommand('copy');node.remove()}
+ button.textContent=ok?'¡Copiado!':'Selecciona el texto para copiar';
+ setTimeout(()=>button.textContent=original,2600);
+}));
+</script></body></html>
