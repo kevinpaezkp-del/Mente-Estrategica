@@ -37,28 +37,26 @@ VALIDACIÓN OBLIGATORIA: comprobar que la suma Creado + Asignado + Cerrado coinc
 5. Comprueba que el número de elementos creados coincide con el número de filas del Excel y explícame qué ajustes hiciste.
 
 Si necesitas autorización para crear, configurar o compartir, muéstrame la acción para aprobarla. Si alguna función no está disponible en mi Slack, dime cómo hacer solo ese paso manualmente, sin afirmar que lo realizaste.</pre></details></article>
-<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 03</span><h2>Slackbot: generar un dashboard desde la lista</h2><button type="button" class="copy" data-copy="2">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-2">Con base en la lista de Slack llamada «Solicitudes de traslado», crea una superficie interactiva (dashboard interno de Slack) titulada «Tablero de solicitudes de traslado».
+<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 03</span><h2>Slackbot: generar un dashboard desde la lista</h2><button type="button" class="copy" data-copy="2">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-2">Con base en la lista de Slack «Solicitudes de traslado», crea una superficie interactiva llamada «Tablero de solicitudes de traslado», utilizando los registros actuales de esa lista.
 
-Utiliza exclusivamente los registros ACTUALES de esa lista. No necesito pegar un enlace: busca la lista por su nombre en mi espacio de trabajo y, si hay más de una con el mismo nombre, muéstrame las opciones para elegir la correcta.
-
-Incluye:
-- Tarjetas con Total de solicitudes, Creado, Asignado, Cerrado y porcentaje de cierre.
-- Gráficos por Estado, Prioridad y Origen.
+El dashboard debe incluir:
+- Tarjetas con total de solicitudes, cantidad en Creado, Asignado y Cerrado, y porcentaje de cierre.
+- Gráficos de solicitudes por Estado, Prioridad, Origen y Responsable.
 - Una tabla con Solicitud, Origen, Destino, Prioridad, Estado, Responsable, FechaSolicitud y FechaCierre.
-- Una sección «Pendientes por gestionar» con solicitudes en estado Creado o Asignado, organizada por prioridad.
-- Si hay datos de fechas utilizables, tiempo promedio de cierre en horas = FechaCierre menos FechaSolicitud, SOLO para registros con Estado = Cerrado y las dos fechas válidas, con cierre no anterior a la solicitud. No incluyas pendientes ni fechas vacías en el promedio; informa el denominador válido.
-- Filtros interactivos por Estado, Prioridad y Origen, si el entorno lo permite.
+- Una sección de pendientes con las solicitudes en estado Creado y Asignado, ordenadas por prioridad.
+- Tiempo promedio de cierre en horas, calculado como FechaCierre menos FechaSolicitud, solamente para solicitudes Cerradas con ambas fechas válidas y cierre igual o posterior a la solicitud. Indica cuántos registros se utilizaron para calcular ese promedio.
+- Filtros seleccionables y combinables por Estado, Prioridad, Origen, Destino y Responsable.
 
-Todos los porcentajes y conteos deben salir de los ítems reales. Si hay campos vacíos, muéstralos como «Sin dato» y evita NaN, Infinity y divisiones por cero. Comprueba que Creado + Asignado + Cerrado coincide con el total de elementos con esos estados; señala cualquier estado diferente.
+Calcula todos los indicadores a partir de los registros de la lista. Al usar los filtros, actualiza los resultados de la superficie si la funcionalidad está disponible. Trata los campos vacíos como «Sin dato», sin inventar valores ni incluirlos en promedios donde no correspondan.
 
-Muestra la fecha de generación y aclara que, si la superficie no se refresca automáticamente al modificar la lista, habrá que regenerarla. Finalmente, indícame cómo abrirla o agregarla como pestaña al mismo canal de la lista.</pre></details></article>
-<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 04</span><h2>Slackbot: revisar pendientes y actualizar una solicitud</h2><button type="button" class="copy" data-copy="3">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-3">En mi lista de Slack llamada «Solicitudes de traslado», necesito hacer dos tareas sencillas:
+Crea el tablero y compártelo en el canal donde está la lista.</pre></details></article>
+<article class="prompt-box"><div class="prompt-head"><span class="prompt-number">PROMPT 04</span><h2>Slackbot: cerrar una solicitud</h2><button type="button" class="copy" data-copy="3">Copiar prompt</button></div><details ><summary>Ver el texto completo</summary><pre id="prompt-3">En la lista de Slack «Solicitudes de traslado», busca la solicitud «TR-030 · Quirófano a Imágenes» y actualízala con estos valores:
 
-PRIMERO: muéstrame un resumen de los pendientes, separados por Estado (Creado y Asignado) y por Prioridad (Alta, Media, Baja). Incluye cuántos hay en cada grupo y una tabla con Solicitud, Estado, Prioridad y Responsable. Usa solo los registros reales de la lista, sin inventar datos ni confundir «pendiente» con «vencido».
+- Estado: Cerrado.
+- Responsable: Equipo B.
+- FechaCierre: 2026-10-21 18:05.
 
-SEGUNDO: busca la solicitud «TR-030 · Quirófano a Imágenes» (o el registro cuyo código sea TR-030). Propón cambiar únicamente Estado a «Asignado» y Responsable a «Equipo B», manteniendo todos los demás campos iguales. Antes de guardar, muéstrame el registro y los dos cambios para que pueda revisarlos y aprobarlos. No hagas la edición si ese registro no existe o ya tiene otros valores incompatibles.
-
-Después de la aprobación, comprueba que el cambio quedó guardado y vuelve a mostrar el resumen actualizado. Si no puedes editar la lista desde Slackbot, dame los pasos para cambiar esos dos campos manualmente en Slack.</pre></details></article></main><footer>LaCardio · Mente Estratégica · Datos ficticios para formación</footer>
+Conserva la FechaSolicitud original (2026-10-21 17:19) y no modifiques los demás campos. Guarda los cambios directamente en la lista.</pre></details></article></main><footer>LaCardio · Mente Estratégica · Datos ficticios para formación</footer>
 <script>
 document.querySelectorAll('[data-copy]').forEach(button=>button.addEventListener('click',async()=>{
  const target=document.querySelector('#prompt-'+button.dataset.copy),original=button.textContent;let ok=false;

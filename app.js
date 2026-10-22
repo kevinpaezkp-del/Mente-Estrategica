@@ -58,7 +58,7 @@
       1:"Crea un dashboard HTML desde el Excel, con filtros combinados, métricas dinámicas y manejo de fechas vacías.",
       2:"Adjunta tu Excel y pídele a Slackbot que cree y configure la lista en un canal.",
       3:"Genera una superficie interactiva directamente desde la lista de Slack.",
-      4:"Consulta los pendientes y practica la actualización controlada de una solicitud."
+      4:"Cambia el estado a Cerrado de una solicitud y registra su fecha y hora de cierre."
     };
     $("#promptCards").innerHTML=(SOURCE.prompts||[]).map(p=>"<article class='promptcard'><span class='id'>PROMPT 0"+p.number+"</span><h3>"+esc(p.title)+"</h3><p>"+esc(descriptions[p.number]||"")+" </p><details><summary>Mostrar el prompt completo</summary><pre>"+esc(p.text)+"</pre></details><button class='btn primary copyPrompt' data-prompt='"+p.number+"'>Copiar prompt ↗</button></article>").join("");
   }
